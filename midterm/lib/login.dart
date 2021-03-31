@@ -14,6 +14,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'signup.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -68,7 +70,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text('Sign Up'),
                   textColor: Colors.black,
                   onPressed: () {
-                    //TODO : nagivate to sign up page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignupPage()),
+                    );
                   },
                 ),
                 RaisedButton(

@@ -1,8 +1,8 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/Users/jeon-yeong-won/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/jeon-yeong-won/material-components-flutter-codelabs/mdc_100_series"
-export "FLUTTER_TARGET=/Users/jeon-yeong-won/material-components-flutter-codelabs/mdc_100_series/lib/main.dart"
+export "FLUTTER_APPLICATION_PATH=/Users/jeon-yeong-won/mobAppDev_midterm/midterm"
+export "FLUTTER_TARGET=/Users/jeon-yeong-won/mobAppDev_midterm/midterm/lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build/ios"
 export "FLUTTER_BUILD_NAME=1.0.0"
@@ -11,4 +11,4 @@ export "DART_DEFINES=flutter.inspector.structuredErrors%3Dtrue"
 export "DART_OBFUSCATION=false"
 export "TRACK_WIDGET_CREATION=true"
 export "TREE_SHAKE_ICONS=false"
-export "PACKAGE_CONFIG=/Users/jeon-yeong-won/material-components-flutter-codelabs/mdc_100_series/.dart_tool/package_config.json"
+export "PACKAGE_CONFIG=/Users/jeon-yeong-won/mobAppDev_midterm/midterm/.dart_tool/package_config.json"
