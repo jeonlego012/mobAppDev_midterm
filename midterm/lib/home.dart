@@ -74,15 +74,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-          onPressed: () {
-            print('Menu button');
-          },
-        ),
         title: Text('SHRINE'),
         actions: <Widget>[
           IconButton(
@@ -105,11 +96,74 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Container(
+                padding: EdgeInsets.only(top: 100),
+                child: Text(
+                  'Pages',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              leading: Icon(
+                Icons.home,
+                semanticLabel: 'home',
+              ),
+              onTap: () {
+                print('Home button');
+              },
+            ),
+            ListTile(
+              title: Text('Search'),
+              leading: Icon(
+                Icons.search,
+                semanticLabel: 'search',
+              ),
+              onTap: () {
+                print('Search button');
+              },
+            ),
+            ListTile(
+              title: Text('Favorite Hotels'),
+              leading: Icon(
+                Icons.location_city,
+                semanticLabel: 'favorite hotels',
+              ),
+              onTap: () {
+                print('Favorite hotels button');
+              },
+            ),
+            ListTile(
+              title: Text('My Page'),
+              leading: Icon(
+                Icons.person,
+                semanticLabel: 'my page',
+              ),
+              onTap: () {
+                print('My page button');
+              },
+            ),
+          ],
+        ),
+      ),
       body: GridView.count(
-          crossAxisCount: 2,
-          padding: EdgeInsets.all(16.0),
-          childAspectRatio: 8.0 / 9.0,
-          children: _buildGridCards(context)),
+        crossAxisCount: 2,
+        padding: EdgeInsets.all(16.0),
+        childAspectRatio: 8.0 / 9.0,
+        children: _buildGridCards(context),
+      ),
       resizeToAvoidBottomInset: false,
     );
   }
