@@ -14,11 +14,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'model/products_repository.dart';
 import 'model/product.dart';
 
-class HomePage extends StatelessWidget {
+const _url = 'https://www.handong.edu/';
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final isSelected = <bool>[true, false];
+
   List<Card> _buildGridCards(BuildContext context) {
     List<Product> products = ProductsRepository.loadProducts(Category.all);
 
@@ -74,7 +84,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SHRINE'),
+        title: Text('Main'),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -87,12 +97,10 @@ class HomePage extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
+              Icons.language,
+              semanticLabel: 'language',
             ),
-            onPressed: () {
-              print('Filter button');
-            },
+            onPressed: _launchURL,
           ),
         ],
       ),
@@ -158,13 +166,38 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.all(16.0),
-        childAspectRatio: 8.0 / 9.0,
-        children: _buildGridCards(context),
-      ),
+      body: OrientationBuilder(builder: (context, orientation) {
+        return Column(
+          children: <Widget>[
+            ToggleButtons(
+              color: Colors.black.withOpacity(0.60),
+              selectedColor: Colors.blue,
+              selectedBorderColor: Colors.blue,
+              isSelected: isSelected,
+              borderRadius: BorderRadius.circular(4.0),
+              onPressed: (index) {
+                setState(() {
+                  isSelected[index] = !isSelected[index];
+                });
+              },
+              children: [
+                Icon(Icons.list),
+                Icon(Icons.grid_view),
+              ],
+            ),
+            GridView.count(
+              crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+              padding: EdgeInsets.all(16.0),
+              childAspectRatio: 8.0 / 9.0,
+              children: _buildGridCards(context),
+            ),
+          ],
+        );
+      }),
       resizeToAvoidBottomInset: false,
     );
   }
 }
+
+void _launchURL() async =>
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
