@@ -16,8 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'model/products_repository.dart';
-import 'model/product.dart';
+import 'model/hotels_repository.dart';
+import 'model/hotel.dart';
 
 const _url = 'https://www.handong.edu/';
 
@@ -27,12 +27,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final isSelected = <bool>[true, false];
+  final isSelected = <bool>[false, true];
 
   List<Card> _buildGridCards(BuildContext context) {
-    List<Product> products = ProductsRepository.loadProducts(Category.all);
+    List<Hotel> hotels = HotelsRepository.loadHotels();
 
-    if (products == null || products.isEmpty) {
+    if (hotels == null || hotels.isEmpty) {
       return const <Card>[];
     }
 
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     final NumberFormat formatter = NumberFormat.simpleCurrency(
         locale: Localizations.localeOf(context).toString());
 
-    return products.map((product) {
+    return hotels.map((product) {
       return Card(
         clipBehavior: Clip.antiAlias,
         child: Column(
@@ -80,6 +80,14 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
+  Widget _buildGrid() => OrientationBuilder(builder: (context, orientation) {
+        return GridView.count(
+          crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+          padding: EdgeInsets.all(16.0),
+          childAspectRatio: 8.0 / 9.0,
+          children: _buildGridCards(context),
+        );
+      });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,10 +174,11 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: OrientationBuilder(builder: (context, orientation) {
-        return Column(
-          children: <Widget>[
-            ToggleButtons(
+      body: Column(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerRight,
+            child: ToggleButtons(
               color: Colors.black.withOpacity(0.60),
               selectedColor: Colors.blue,
               selectedBorderColor: Colors.blue,
@@ -177,7 +186,15 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(4.0),
               onPressed: (index) {
                 setState(() {
-                  isSelected[index] = !isSelected[index];
+                  for (int buttonIndex = 0;
+                      buttonIndex < isSelected.length;
+                      buttonIndex++) {
+                    if (buttonIndex == index) {
+                      isSelected[buttonIndex] = true;
+                    } else {
+                      isSelected[buttonIndex] = false;
+                    }
+                  }
                 });
               },
               children: [
@@ -185,16 +202,11 @@ class _HomePageState extends State<HomePage> {
                 Icon(Icons.grid_view),
               ],
             ),
-            GridView.count(
-              crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
-              padding: EdgeInsets.all(16.0),
-              childAspectRatio: 8.0 / 9.0,
-              children: _buildGridCards(context),
-            ),
-          ],
-        );
-      }),
-      resizeToAvoidBottomInset: false,
+          ),
+          _buildGrid(),
+        ],
+      ),
+      resizeToAvoidBottomInset: true,
     );
   }
 }
