@@ -17,22 +17,24 @@ import 'package:flutter/foundation.dart';
 class Hotel {
   const Hotel({
     @required this.id,
-    @required this.isFeatured,
     @required this.name,
-    @required this.price,
+    @required this.location,
+    @required this.stars,
+    @required this.phoneNumber,
+    @required this.description,
   })  : assert(id != null),
-        assert(isFeatured != null),
         assert(name != null),
-        assert(price != null);
+        assert(location != null),
+        assert(stars != null),
+        assert(phoneNumber != null),
+        assert(description != null);
 
   final int id;
-  final bool isFeatured;
-  final String name;
-  final int price;
+  final String name, location, phoneNumber, description;
+  final int stars;
 
-  String get assetName => '$id-0.jpg';
-  String get assetPackage => 'shrine_images';
+  String get assetName => 'assets/hotel_images/$id.jpg';
 
-  @override
-  String toString() => "$name (id=$id)";
+  /*@override
+  String nameToString() => "$name (id=$id)";*/
 }

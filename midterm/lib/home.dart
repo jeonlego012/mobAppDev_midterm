@@ -37,10 +37,8 @@ class _HomePageState extends State<HomePage> {
     }
 
     final ThemeData theme = Theme.of(context);
-    final NumberFormat formatter = NumberFormat.simpleCurrency(
-        locale: Localizations.localeOf(context).toString());
 
-    return hotels.map((product) {
+    return hotels.map((hotel) {
       return Card(
         clipBehavior: Clip.antiAlias,
         child: Column(
@@ -49,8 +47,7 @@ class _HomePageState extends State<HomePage> {
             AspectRatio(
               aspectRatio: 18 / 11,
               child: Image.asset(
-                product.assetName,
-                package: product.assetPackage,
+                hotel.assetName,
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -61,14 +58,20 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      product.name,
-                      style: theme.textTheme.headline6,
+                      hotel.name,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
                       maxLines: 1,
                     ),
                     SizedBox(height: 8.0),
                     Text(
-                      formatter.format(product.price),
-                      style: theme.textTheme.subtitle2,
+                      hotel.location,
+                      style: TextStyle(
+                        fontSize: 8,
+                      ),
+                      overflow: TextOverflow.visible,
                     ),
                   ],
                 ),
@@ -80,14 +83,6 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  Widget _buildGrid() => OrientationBuilder(builder: (context, orientation) {
-        return GridView.count(
-          crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
-          padding: EdgeInsets.all(16.0),
-          childAspectRatio: 8.0 / 9.0,
-          children: _buildGridCards(context),
-        );
-      });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,7 +198,16 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          _buildGrid(),
+          Expanded(
+            child: OrientationBuilder(builder: (context, orientation) {
+              return GridView.count(
+                crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+                padding: EdgeInsets.all(16.0),
+                childAspectRatio: 8.0 / 9.0,
+                children: _buildGridCards(context),
+              );
+            }),
+          ),
         ],
       ),
       resizeToAvoidBottomInset: true,
