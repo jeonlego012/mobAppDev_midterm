@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       return const <Card>[];
     }
 
-    final ThemeData theme = Theme.of(context);
+    //final ThemeData theme = Theme.of(context);
 
     return hotels.map((hotel) {
       return Card(
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AspectRatio(
-              aspectRatio: 18 / 11,
+              aspectRatio: 18 / 8,
               child: Image.asset(
                 hotel.assetName,
                 fit: BoxFit.fitWidth,
@@ -65,13 +65,28 @@ class _HomePageState extends State<HomePage> {
                       ),
                       maxLines: 1,
                     ),
-                    SizedBox(height: 8.0),
+                    //SizedBox(height: 5.0),
                     Text(
                       hotel.location,
                       style: TextStyle(
                         fontSize: 8,
                       ),
                       overflow: TextOverflow.visible,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 90.0),
+                      child: TextButton(
+                        onPressed: () {
+                          print('more');
+                        },
+                        child: Text('more'),
+                        style: TextButton.styleFrom(
+                          alignment: Alignment.centerRight,
+                          textStyle: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -189,6 +204,7 @@ class _HomePageState extends State<HomePage> {
                     } else {
                       isSelected[buttonIndex] = false;
                     }
+                    print(isSelected[buttonIndex]);
                   }
                 });
               },
