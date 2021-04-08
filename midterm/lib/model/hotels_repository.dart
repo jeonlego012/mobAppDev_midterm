@@ -20,8 +20,7 @@ class HotelsRepository {
       Hotel(
         id: 0,
         name: 'Inter-Burgo Hotel',
-        location:
-            '1-1-13 Shimbashi, Minato Ward, Tokyo, Shinbashi, Tokyo, Japan, 105-0004',
+        location: '1-1-13 Shimbashi, Minato Ward',
         stars: 4,
         phoneNumber: '053-380-0114',
         description:
@@ -30,8 +29,7 @@ class HotelsRepository {
       Hotel(
         id: 1,
         name: 'APA Hotel',
-        location:
-            '2-3, Hibino, Mihama-ku, Chiba-shi, Chiba, Tokyo Disney Resort, Tokyo, Japan, 261-0021',
+        location: '2-3, Hibino, Mihama-ku, Chiba-shi',
         stars: 4,
         phoneNumber: '+81 570-070-111',
         description:
@@ -40,8 +38,7 @@ class HotelsRepository {
       Hotel(
         id: 2,
         name: 'Hyatt Place',
-        location:
-            '27-03 43RD AVE, Long Island City, New York (NY), United States, 11101',
+        location: '27-03 43RD AVE, Long Island City',
         stars: 3,
         phoneNumber: '+1 929-208-3100',
         description:
@@ -50,8 +47,7 @@ class HotelsRepository {
       Hotel(
         id: 3,
         name: 'Novotel Peace Hotel',
-        location:
-            '27-03 43RD AVE, Long Island City, New York (NY), United States, 11101',
+        location: 'Beijing, Dongcheng, Jinyu Hutong',
         stars: 4,
         phoneNumber: '+861065128833',
         description:
@@ -60,8 +56,7 @@ class HotelsRepository {
       Hotel(
         id: 4,
         name: 'Millennium Hilton',
-        location:
-            '123 Charoennakorn Road, Klongsan, Bangkok Riverside, Bangkok, Thailand, 10600',
+        location: '123 Charoennakorn Road, Klongsan',
         stars: 5,
         phoneNumber: '+66 2 442 2000',
         description:
@@ -70,8 +65,7 @@ class HotelsRepository {
       Hotel(
         id: 5,
         name: 'Hotel Artemide',
-        location:
-            '22, Nazionale Street, Termini Central Station, Rome, Italy, 00184',
+        location: '22, Nazionale Street, Termini Central Station',
         stars: 4,
         phoneNumber: '+39 06 489911',
         description:
@@ -80,8 +74,7 @@ class HotelsRepository {
       Hotel(
         id: 6,
         name: 'Radisson Blu Waterfront Hotel',
-        location:
-            'Nils Ericsons Plan 4, City Center - Norrmalm, Stockholm, Sweden, 111 64',
+        location: 'Nils Ericsons Plan 4, City Center',
         stars: 4,
         phoneNumber: '+46 8 505 060 00',
         description:
@@ -90,8 +83,7 @@ class HotelsRepository {
       Hotel(
         id: 7,
         name: 'Holiday Inn',
-        location:
-            'Hofwisenstrasse 30 Rumlang, Kloten, Zurich, Switzerland, 8153',
+        location: 'Hofwisenstrasse 30 Rumlang, Kloten',
         stars: 4,
         phoneNumber: '+41 44 809 34 00',
         description:

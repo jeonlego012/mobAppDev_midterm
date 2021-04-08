@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
       return Card(
         clipBehavior: Clip.antiAlias,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AspectRatio(
@@ -52,43 +53,67 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      hotel.name,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
+              //padding: EdgeInsets.all(10.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 30.0),
+                    child: Icon(
+                      Icons.location_on,
+                      color: Colors.blue,
                     ),
-                    //SizedBox(height: 5.0),
-                    Text(
-                      hotel.location,
-                      style: TextStyle(
-                        fontSize: 8,
-                      ),
-                      overflow: TextOverflow.visible,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(left: 90.0),
-                      child: TextButton(
-                        onPressed: () {
-                          print('more');
-                        },
-                        child: Text('more'),
-                        style: TextButton.styleFrom(
-                          alignment: Alignment.centerRight,
-                          textStyle: TextStyle(
-                            fontSize: 10,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          children: [
+                            for (int i = 0; i < hotel.stars; i++)
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                                size: 10.0,
+                              ),
+                          ],
+                        ),
+                        Container(
+                          child: Text(
+                            hotel.name,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
+                        Container(
+                          child: Text(
+                            hotel.location,
+                            style: TextStyle(
+                              fontSize: 8,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {
+                  print('more');
+                },
+                child: Text('more'),
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  //alignment: Alignment.centerRight,
+                  textStyle: TextStyle(
+                    fontSize: 10,
+                  ),
                 ),
               ),
             ),
