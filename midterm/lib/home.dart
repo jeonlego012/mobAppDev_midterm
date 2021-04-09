@@ -29,36 +29,36 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final isSelected = <bool>[false, true];
 
-  List<Card> _buildGridCards(BuildContext context) {
+  List<Card> _buildGridCards() {
     List<Hotel> hotels = HotelsRepository.loadHotels();
 
     if (hotels == null || hotels.isEmpty) {
       return const <Card>[];
     }
 
-    //final ThemeData theme = Theme.of(context);
-
     return hotels.map((hotel) {
       return Card(
         clipBehavior: Clip.antiAlias,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          //mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             AspectRatio(
-              aspectRatio: 18 / 8,
+              aspectRatio: 18 / 9,
               child: Image.asset(
                 hotel.assetName,
                 fit: BoxFit.fitWidth,
               ),
             ),
+            SizedBox(height: 5.0),
             Expanded(
-              //padding: EdgeInsets.all(10.0),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(top: 30.0),
+                    padding: EdgeInsets.only(top: 30.0, left: 5.0, right: 5.0),
                     child: Icon(
                       Icons.location_on,
                       color: Colors.blue,
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                               Icon(
                                 Icons.star,
                                 color: Colors.yellow,
-                                size: 10.0,
+                                size: 12.0,
                               ),
                           ],
                         ),
@@ -110,9 +110,8 @@ class _HomePageState extends State<HomePage> {
                 child: Text('more'),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
-                  //alignment: Alignment.centerRight,
                   textStyle: TextStyle(
-                    fontSize: 10,
+                    fontSize: 14,
                   ),
                 ),
               ),
@@ -123,8 +122,98 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
+  List<Card> _buildListCards() {
+    List<Hotel> hotels = HotelsRepository.loadHotels();
+
+    if (hotels == null || hotels.isEmpty) {
+      return const <Card>[];
+    }
+
+    return hotels.map((hotel) {
+      return Card(
+        clipBehavior: Clip.antiAlias,
+        child: Row(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                child: Image.asset(
+                  hotel.assetName,
+                  fit: BoxFit.cover,
+                  width: 90,
+                  height: 90,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        //SizedBox(height: 10.0),
+                        Row(
+                          children: [
+                            for (int i = 0; i < hotel.stars; i++)
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                                size: 12.0,
+                              ),
+                          ],
+                        ),
+                        Container(
+                          child: Text(
+                            hotel.name,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            hotel.location,
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {
+                              print('more');
+                            },
+                            child: Text('more'),
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              textStyle: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<Hotel> hotels = HotelsRepository.loadHotels();
     return Scaffold(
       appBar: AppBar(
         title: Text('Main'),
@@ -240,14 +329,25 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Expanded(
-            child: OrientationBuilder(builder: (context, orientation) {
-              return GridView.count(
-                crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
-                padding: EdgeInsets.all(16.0),
-                childAspectRatio: 8.0 / 9.0,
-                children: _buildGridCards(context),
-              );
-            }),
+            child: isSelected[0]
+                ? /*ListView(
+                    children: _buildListCards(),
+                  )*/
+                GridView.count(
+                    crossAxisCount: 1,
+                    padding: EdgeInsets.all(16.0),
+                    childAspectRatio: 8.0 / 2.5,
+                    children: _buildListCards(),
+                  )
+                : OrientationBuilder(builder: (context, orientation) {
+                    return GridView.count(
+                      crossAxisCount:
+                          orientation == Orientation.portrait ? 2 : 3,
+                      padding: EdgeInsets.all(16.0),
+                      childAspectRatio: 8.0 / 9.0,
+                      children: _buildGridCards(),
+                    );
+                  }),
           ),
         ],
       ),
