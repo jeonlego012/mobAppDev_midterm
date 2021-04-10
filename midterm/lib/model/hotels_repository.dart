@@ -16,7 +16,7 @@ import 'hotel.dart';
 
 class HotelsRepository {
   static List<Hotel> loadHotels() {
-    const allHotels = <Hotel>[
+    var allHotels = <Hotel>[
       Hotel(
         id: 0,
         name: 'Inter-Burgo Hotel',
@@ -25,6 +25,7 @@ class HotelsRepository {
         phoneNumber: '053-380-0114',
         description:
             'This hotel is located in front of the Daegu City Fair Ground, 15-minute drive from both the Daegu International Airport and Dong-Daegu train station. Due to its location, Inter-Burgo EXCO Hotel is popular among exhibitions and fair visitors. There are a total of 303 guest rooms, including 36 suites, modernly furnished and equipped with direct dial telephones, bottled mineral water, wake-up call service and international TV channels.',
+        isFavorite: false,
       ),
       Hotel(
         id: 1,
@@ -34,6 +35,7 @@ class HotelsRepository {
         phoneNumber: '+81 570-070-111',
         description:
             'For travelers who want to take in the sights and sounds of Tokyo, APA Hotel & Resort Tokyo Bay Makuhari is the perfect choice. From here, guests can enjoy easy access to all that the lively city has to offer. With its convenient location, the hotel offers easy access to the must-see destinations.',
+        isFavorite: false,
       ),
       Hotel(
         id: 2,
@@ -43,6 +45,7 @@ class HotelsRepository {
         phoneNumber: '+1 929-208-3100',
         description:
             'Situated in the Long Island City area, HYATT PLACE LONG ISLAND CITY/NY is the perfect place to experience Long Island City (NY) and its surroundings. From here, guests can make the most of all that the lively city has to offer. With its convenient location, the property offers easy access to the must-see destinations.',
+        isFavorite: false,
       ),
       Hotel(
         id: 3,
@@ -52,6 +55,7 @@ class HotelsRepository {
         phoneNumber: '+861065128833',
         description:
             'This city center accommodation is ideal for both corporate and leisure travelers who want comfort and easy access to what Beijing has to offer. Novotel Peace Beijing Hotel is situated in a modern shopping and business district of Wangfujing. Guests will find themselves only steps away from world-famous attractions such as the Forbidden City and Tiananmen Square.',
+        isFavorite: false,
       ),
       Hotel(
         id: 4,
@@ -61,6 +65,7 @@ class HotelsRepository {
         phoneNumber: '+66 2 442 2000',
         description:
             'Towering majestically over the Chao Praya River, this award-winning hotel boasts unrivaled river and city views. Boasting its own private pier, Millennium Hilton Bangkok offers frequent shuttle boats to the Saphan Taksin skytrain station and River City shopping center. Attractions such as the Grand Palace, Temple of Dawn, and the Reclining Buddha are all a quick boat ride away.',
+        isFavorite: false,
       ),
       Hotel(
         id: 5,
@@ -70,6 +75,7 @@ class HotelsRepository {
         phoneNumber: '+39 06 489911',
         description:
             'Well-placed in the sightseeing, restaurants, culture area of Rome city, Artemide Hotel provides a most conducive spot for you to take a break from your busy days. The excitement of the city center is only 0.0 Km away. A haven of rest and relaxation, the hotel will offer total renewal just steps away from the numerous attractions such as St Paul\'s Within the Walls, Sartoria Italiana Quattro Fontane, Minerva Tours Rome.',
+        isFavorite: false,
       ),
       Hotel(
         id: 6,
@@ -79,6 +85,7 @@ class HotelsRepository {
         phoneNumber: '+46 8 505 060 00',
         description:
             'Conveniently located in Stockholm, Radisson Blu Waterfront Hotel Stockholm is a great base from which to explore this vibrant city. From here, guests can enjoy easy access to all that the lively city has to offer. For those of you who want to venture out, Stockholm Waterfront Arena, Stockholm City Hall, Stadshuset are just some of the attractions available to visitors.',
+        isFavorite: false,
       ),
       Hotel(
         id: 7,
@@ -88,6 +95,7 @@ class HotelsRepository {
         phoneNumber: '+41 44 809 34 00',
         description:
             'Offering a free shuttle service from and to the airport, the Holiday Inn Express Zürich Airport offers air-conditioned rooms with flat-screen TV and free coffee and tea. The airport is just 5 km away, and the Zurich fairgrounds are also close by. The centre of Zurich can be reached within 20 minutes, and the nearest train station is a 5-minute walk from the hotel.',
+        isFavorite: false,
       ),
     ];
     return allHotels;

@@ -18,6 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'model/hotels_repository.dart';
 import 'model/hotel.dart';
+import 'home_detail.dart';
 
 const _url = 'https://www.handong.edu/';
 
@@ -28,10 +29,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final isSelected = <bool>[false, true];
+  List<Hotel> hotels = HotelsRepository.loadHotels();
 
   List<Card> _buildGridCards() {
-    List<Hotel> hotels = HotelsRepository.loadHotels();
-
     if (hotels == null || hotels.isEmpty) {
       return const <Card>[];
     }
@@ -46,9 +46,12 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             AspectRatio(
               aspectRatio: 18 / 9,
-              child: Image.asset(
-                hotel.assetName,
-                fit: BoxFit.fitWidth,
+              child: Hero(
+                tag: hotel.id,
+                child: Image.asset(
+                  hotel.assetName,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
             SizedBox(height: 5.0),
@@ -105,7 +108,11 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-                  print('more');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HotelDetailPage(hotel: hotel)),
+                  );
                 },
                 child: Text('more'),
                 style: TextButton.styleFrom(
@@ -123,7 +130,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Card> _buildListCards() {
-    List<Hotel> hotels = HotelsRepository.loadHotels();
+    //List<Hotel> hotels = HotelsRepository.loadHotels();
 
     if (hotels == null || hotels.isEmpty) {
       return const <Card>[];
@@ -134,15 +141,18 @@ class _HomePageState extends State<HomePage> {
         clipBehavior: Clip.antiAlias,
         child: Row(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                child: Image.asset(
-                  hotel.assetName,
-                  fit: BoxFit.cover,
-                  width: 90,
-                  height: 90,
+            Hero(
+              tag: hotel.id,
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  child: Image.asset(
+                    hotel.assetName,
+                    fit: BoxFit.cover,
+                    width: 90,
+                    height: 90,
+                  ),
                 ),
               ),
             ),
@@ -188,7 +198,12 @@ class _HomePageState extends State<HomePage> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                              print('more');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        HotelDetailPage(hotel: hotel)),
+                              );
                             },
                             child: Text('more'),
                             style: TextButton.styleFrom(
@@ -213,7 +228,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Hotel> hotels = HotelsRepository.loadHotels();
     return Scaffold(
       appBar: AppBar(
         title: Text('Main'),
@@ -301,6 +315,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: <Widget>[
           Container(
+            padding: EdgeInsets.only(top: 10.0, right: 16.0),
             alignment: Alignment.centerRight,
             child: ToggleButtons(
               color: Colors.black.withOpacity(0.60),
@@ -318,7 +333,6 @@ class _HomePageState extends State<HomePage> {
                     } else {
                       isSelected[buttonIndex] = false;
                     }
-                    print(isSelected[buttonIndex]);
                   }
                 });
               },
@@ -330,10 +344,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             child: isSelected[0]
-                ? /*ListView(
-                    children: _buildListCards(),
-                  )*/
-                GridView.count(
+                ? GridView.count(
                     crossAxisCount: 1,
                     padding: EdgeInsets.all(16.0),
                     childAspectRatio: 8.0 / 2.5,

@@ -15,23 +15,26 @@
 import 'package:flutter/foundation.dart';
 
 class Hotel {
-  const Hotel({
+  Hotel({
     @required this.id,
     @required this.name,
     @required this.location,
     @required this.stars,
     @required this.phoneNumber,
     @required this.description,
+    @required this.isFavorite,
   })  : assert(id != null),
         assert(name != null),
         assert(location != null),
         assert(stars != null),
         assert(phoneNumber != null),
-        assert(description != null);
+        assert(description != null),
+        assert(isFavorite != null);
 
   final int id;
   final String name, location, phoneNumber, description;
   final int stars;
+  bool isFavorite;
 
   String get assetName => 'assets/hotel_images/$id.jpg';
 
