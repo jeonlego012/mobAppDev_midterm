@@ -130,8 +130,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Card> _buildListCards() {
-    //List<Hotel> hotels = HotelsRepository.loadHotels();
-
     if (hotels == null || hotels.isEmpty) {
       return const <Card>[];
     }
@@ -277,6 +275,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onTap: () {
                 print('Home button');
+                Navigator.pop(context);
               },
             ),
             ListTile(
@@ -297,6 +296,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onTap: () {
                 print('Favorite hotels button');
+                Navigator.pushNamed(context, '/favorite', arguments: hotels);
               },
             ),
             ListTile(
