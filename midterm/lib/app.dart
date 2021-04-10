@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'login.dart';
 import 'favorite_hotels.dart';
+import 'search.dart';
 
 class ShrineApp extends StatelessWidget {
   @override
@@ -27,6 +28,7 @@ class ShrineApp extends StatelessWidget {
       initialRoute: '/login',
       onGenerateRoute: _getRoute,
       routes: {
+        '/search': (context) => SearchPage(),
         '/favorite': (context) => FavoriteHotelsPage(),
       },
     );

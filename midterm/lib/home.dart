@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
               semanticLabel: 'search',
             ),
             onPressed: () {
-              print('Search button');
+              Navigator.pushNamed(context, '/search');
             },
           ),
           IconButton(
@@ -286,6 +286,7 @@ class _HomePageState extends State<HomePage> {
               ),
               onTap: () {
                 print('Search button');
+                Navigator.pushNamed(context, '/search');
               },
             ),
             ListTile(
