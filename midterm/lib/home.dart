@@ -274,7 +274,6 @@ class _HomePageState extends State<HomePage> {
                 semanticLabel: 'home',
               ),
               onTap: () {
-                print('Home button');
                 Navigator.pop(context);
               },
             ),
@@ -285,7 +284,6 @@ class _HomePageState extends State<HomePage> {
                 semanticLabel: 'search',
               ),
               onTap: () {
-                print('Search button');
                 Navigator.pushNamed(context, '/search');
               },
             ),
@@ -296,7 +294,6 @@ class _HomePageState extends State<HomePage> {
                 semanticLabel: 'favorite hotels',
               ),
               onTap: () {
-                print('Favorite hotels button');
                 Navigator.pushNamed(context, '/favorite', arguments: hotels);
               },
             ),
@@ -307,7 +304,7 @@ class _HomePageState extends State<HomePage> {
                 semanticLabel: 'my page',
               ),
               onTap: () {
-                print('My page button');
+                Navigator.pushNamed(context, '/myPage', arguments: hotels);
               },
             ),
           ],

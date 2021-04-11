@@ -18,6 +18,7 @@ import 'home.dart';
 import 'login.dart';
 import 'favorite_hotels.dart';
 import 'search.dart';
+import 'my_page.dart';
 
 class ShrineApp extends StatelessWidget {
   @override
@@ -30,6 +31,7 @@ class ShrineApp extends StatelessWidget {
       routes: {
         '/search': (context) => SearchPage(),
         '/favorite': (context) => FavoriteHotelsPage(),
+        '/myPage': (context) => MyPage(),
       },
     );
   }

@@ -14,7 +14,8 @@ dependencies:
   
   url_launcher: ^6.0.3
 
-  overlay: ^0.0.1
+  rive: ^0.7.1
+
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +33,9 @@ flutter:
     - assets/hotel_images/5.jpg
     - assets/hotel_images/6.jpg
     - assets/hotel_images/7.jpg
+    - assets/knight063.riv
+    - assets/off_road_car_blog_0_6.riv
+    - assets/off_road_car.riv
 
 
 

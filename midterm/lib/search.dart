@@ -127,12 +127,7 @@ class _SearchPageState extends State<SearchPage> {
           SizedBox(height: 300.0),
           Container(
             padding: EdgeInsets.only(left: 150.0, right: 150.0),
-            child: TextButton(
-              style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.blue,
-                elevation: 5,
-              ),
+            child: ElevatedButton(
               onPressed: () => _showResult(),
               child: Text('Search'),
             ),
@@ -202,11 +197,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
               actions: <Widget>[
                 Container(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.white,
-                      backgroundColor: Colors.blue,
-                    ),
+                  child: ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
