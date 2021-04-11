@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-//import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:flutter/services.dart';
 
 import 'model/hotel.dart';
@@ -13,6 +13,39 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
+  rive.Artboard _artboard;
+  rive.RiveAnimationController _nightController;
+  bool _night = false;
+
+  @override
+  void initState() {
+    _loadRiveFile();
+    super.initState();
+  }
+
+  void _loadRiveFile() async {
+    final bytes = await rootBundle.load('assets/knight063.riv');
+    final file = rive.RiveFile();
+    if (file.import(bytes)) {
+      setState(() => _artboard = file.mainArtboard
+        ..addController((rive.SimpleAnimation('idle'))));
+    }
+  }
+
+  void _nightChange(bool nightOn) {
+    _night = !_night;
+    if (_night) {
+      _artboard.addController(
+        _nightController = rive.SimpleAnimation('day_night'),
+      );
+    } else {
+      _artboard.addController(
+        _nightController = rive.SimpleAnimation('night_day'),
+      );
+    }
+    setState(() => _night = nightOn);
+  }
+
   Widget build(BuildContext context) {
     final List<Hotel> hotels =
         ModalRoute.of(context).settings.arguments as List<Hotel>;
@@ -28,18 +61,80 @@ class _MyPageState extends State<MyPage> {
       appBar: AppBar(
         title: Text('My Page'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            for (final favoriteHotel in favoriteHotels)
-              FavoriteListItem(
-                hotel: favoriteHotel,
-                assetName: favoriteHotel.assetName,
-                name: favoriteHotel.name,
-                location: favoriteHotel.location,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.only(top: 30.0, left: 120.0),
+            child: _artboard != null
+                ? ClipOval(
+                    child: SizedBox(
+                      width: 150,
+                      height: 150,
+                      child: rive.Rive(
+                        artboard: _artboard,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
+                : SizedBox(),
+          ),
+          Row(
+            children: [
+              SizedBox(width: 145.0),
+              Icon(Icons.wb_sunny),
+              Container(
+                child: Switch(
+                  value: _night,
+                  onChanged: _nightChange,
+                  inactiveThumbColor: Colors.yellow,
+                  inactiveTrackColor: Colors.yellow[200],
+                  activeColor: Colors.purple,
+                ),
               ),
-          ],
-        ),
+              Icon(Icons.nightlight_round),
+            ],
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 145.0, bottom: 30.0),
+            child: Column(
+              children: [
+                Text(
+                  'Youngone Jeon',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text('21700643'),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 30.0),
+            child: Text(
+              'My Favorite Hotel List',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  for (final favoriteHotel in favoriteHotels)
+                    FavoriteListItem(
+                      hotel: favoriteHotel,
+                      assetName: favoriteHotel.assetName,
+                      name: favoriteHotel.name,
+                      location: favoriteHotel.location,
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -150,7 +245,6 @@ class _FavoriteListItemState extends State<FavoriteListItem> {
   Widget _buildTap(BuildContext context) {
     return InkWell(onTap: () {
       setState(() {
-        print(widget.hotel);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -215,55 +309,3 @@ class ParallaxFlowDelegate extends FlowDelegate {
         backgroundImageKey != oldDelegate.backgroundImageKey;
   }
 }
-
-/*
-class MyPage extends StatefulWidget {
-  const MyPage({Key key}) : super(key: key);
-  @override
-  _MyPageState createState() => _MyPageState();
-}
-
-class _MyPageState extends State<MyPage> {
-  void _togglePlay() {
-    setState(() => _controller.isActive = !_controller.isActive);
-  }
-
-  bool get isPlaying => _controller?.isActive ?? false;
-
-  Artboard _riveArtboard;
-  RiveAnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-
-    rootBundle.load('assets/knight063.riv').then(
-      (data) async {
-        final file = RiveFile.import(data);
-        final artboard = file.mainArtboard;
-        artboard.addController(_controller = SimpleAnimation('idle'));
-        setState(() => _riveArtboard = artboard);
-      },
-    );
-  }
-
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Page'),
-      ),
-      body: Center(
-        child: _riveArtboard == null
-            ? const SizedBox()
-            : Rive(artboard: _riveArtboard),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _togglePlay,
-        tooltip: isPlaying ? 'Pause' : 'Play',
-        child: Icon(
-          isPlaying ? Icons.pause : Icons.play_arrow,
-        ),
-      ),
-    );
-  }
-}*/

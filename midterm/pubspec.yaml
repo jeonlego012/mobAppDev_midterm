@@ -14,7 +14,7 @@ dependencies:
   
   url_launcher: ^6.0.3
 
-  rive: ^0.7.1
+  rive: ^0.6.2
 
 
 dev_dependencies:
@@ -34,8 +34,6 @@ flutter:
     - assets/hotel_images/6.jpg
     - assets/hotel_images/7.jpg
     - assets/knight063.riv
-    - assets/off_road_car_blog_0_6.riv
-    - assets/off_road_car.riv
 
 
 
